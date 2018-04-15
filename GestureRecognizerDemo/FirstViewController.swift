@@ -25,8 +25,11 @@ class FirstViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         let rotateGesture = UIRotationGestureRecognizer(target: self, action: #selector(handleRotation(recognizer:)))
         let pinchGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePinch(recognizer:)))
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(recognizer:)))
+        let screenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleScreenEdgePan(recognizer:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         
-        squareView.gestureRecognizers = [panGesture, tapGesture, rotateGesture, pinchGesture]
+        squareView.gestureRecognizers = [panGesture, tapGesture, rotateGesture, pinchGesture, swipeGesture, screenEdgePanGesture, longPressGesture]
         
     }
 
@@ -56,10 +59,39 @@ class FirstViewController: UIViewController {
     }
     
     @objc func handlePinch(recognizer : UIPinchGestureRecognizer) {
-        if let view = recognizer.view {
-            view.transform = view.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
-            recognizer.scale = 1
-        }
+        
+        let pinchLabel: UILabel = UILabel()
+        pinchLabel.frame = CGRect(x: 50, y: 150, width: 200, height: 21)
+        pinchLabel.backgroundColor = UIColor.orange
+        pinchLabel.textColor = UIColor.black
+        pinchLabel.textAlignment = NSTextAlignment.center
+        pinchLabel.text = "Dude! You Pinched Me!"
+        self.view.addSubview(pinchLabel)
+        
+    }
+    
+    @objc func handleSwipe(recognizer: UISwipeGestureRecognizer) {
+        
+        let swipeLabel: UILabel = UILabel()
+        swipeLabel.frame = CGRect(x: 50, y: 150, width: 200, height: 21)
+        swipeLabel.backgroundColor = UIColor.orange
+        swipeLabel.textColor = UIColor.black
+        swipeLabel.textAlignment = NSTextAlignment.center
+        swipeLabel.text = "Dude! You Swiped Me!"
+        self.view.addSubview(swipeLabel)
+        
+    }
+    
+    @objc func handleScreenEdgePan(recognizer: UIScreenEdgePanGestureRecognizer) {
+        
+        print ("screen edge pan has been recognized")
+        
+    }
+    
+    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
+        
+        print ("long press has been recognized")
+        
     }
 }
 
